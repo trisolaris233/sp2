@@ -25,33 +25,32 @@ def same():
     token = 2333
     form = request.headers.get("token")
 
-    res = {
-        "code": "200",
-        "res": "",
-        "msg": "OK"
-    }
-    if token == int(request.headers.get("token")): 
+    #res = {
+    #    "code": "200",
+    #    "res": "",
+    #    "msg": "OK"
+    #}
+    res = {}
+    if str(token) == str(request.headers.get("token")): 
         try:
             req = requests.get(url, headers=header)
             jsonmsg = req.json()
-            res['res'] = jsonmsg
+            res = jsonmsg
                     
         except requests.ConnectionError:
             res['code'] = 1
-            res['msg'] = "ConnectionError"
+            # res['msg'] = "ConnectionError"
 
         except requests.Timeout:
             res['code'] = 2
-            res['msg'] = "Timeout"
-            pass
+            # res['msg'] = "Timeout"
         except requests.HTTPError:
             res['code'] = 3
-            res['msg'] = "HTTPError"
+            # res['msg'] = "HTTPError"
 
         return jsonify(res)
 
-    res['code']=4
-    res['msg'] = "Wrong Token"
+    res['code'] = 4
     return jsonify(res)
 
 
