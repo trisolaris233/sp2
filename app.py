@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/same', methods=['POST'])
+@app.route('/same', methods=['POST', 'GET'])
 def same():
     url = "https://api.same01.com/user/contact/senses"
     header = {
